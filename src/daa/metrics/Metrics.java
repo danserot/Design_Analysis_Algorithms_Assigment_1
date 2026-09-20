@@ -5,7 +5,11 @@ public class Metrics {
     private long comparisons;
     private int maxDepth;
 
-    public void comparison() {
+    public Metrics() {
+        reset();
+    }
+
+    public void incrementComparisons() {
         comparisons++;
     }
 

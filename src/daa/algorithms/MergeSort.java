@@ -17,8 +17,17 @@ public class MergeSort implements Sorter {
             return;
         }
 
+        // One reusable buffer for the whole algorithm
         int[] buffer = new int[a.length];
-        mergeSort(a, buffer, 0, a.length - 1, metrics, 1);
+
+        mergeSort(
+                a,
+                buffer,
+                0,
+                a.length - 1,
+                metrics,
+                1
+        );
     }
 
     private void mergeSort(
@@ -27,12 +36,14 @@ public class MergeSort implements Sorter {
             int left,
             int right,
             Metrics metrics,
-            int depth) {
+            int depth
+    ) {
 
         metrics.updateDepth(depth);
 
         int size = right - left + 1;
 
+        // Assignment requirement: cutoff <= 15
         if (size <= CUTOFF) {
             InsertionSort.sort(a, left, right, metrics);
             return;
@@ -40,8 +51,23 @@ public class MergeSort implements Sorter {
 
         int mid = left + (right - left) / 2;
 
-        mergeSort(a, buffer, left, mid, metrics, depth + 1);
-        mergeSort(a, buffer, mid + 1, right, metrics, depth + 1);
+        mergeSort(
+                a,
+                buffer,
+                left,
+                mid,
+                metrics,
+                depth + 1
+        );
+
+        mergeSort(
+                a,
+                buffer,
+                mid + 1,
+                right,
+                metrics,
+                depth + 1
+        );
 
         merge(a, buffer, left, mid, right, metrics);
     }
@@ -52,14 +78,15 @@ public class MergeSort implements Sorter {
             int left,
             int mid,
             int right,
-            Metrics metrics) {
+            Metrics metrics
+    ) {
 
         int i = left;
         int j = mid + 1;
         int k = left;
 
         while (i <= mid && j <= right) {
-            metrics.comparison();
+            metrics.incrementComparisons();
 
             if (a[i] <= a[j]) {
                 buffer[k++] = a[i++];
@@ -76,8 +103,8 @@ public class MergeSort implements Sorter {
             buffer[k++] = a[j++];
         }
 
-        for (int x = left; x <= right; x++) {
-            a[x] = buffer[x];
+        for (int index = left; index <= right; index++) {
+            a[index] = buffer[index];
         }
     }
 }

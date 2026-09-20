@@ -13,7 +13,7 @@ public final class InsertionSort {
             int j = i - 1;
 
             while (j >= left) {
-                metrics.comparison();
+                metrics.incrementComparisons();
 
                 if (a[j] <= value) {
                     break;
