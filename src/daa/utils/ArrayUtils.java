@@ -10,15 +10,26 @@ public final class ArrayUtils {
     private ArrayUtils() {
     }
 
-    public static int[] generate(int size, InputType type) {
+    public static int[] generate(
+            int size,
+            InputType type
+    ) {
+
         return switch (type) {
-            case RANDOM -> randomArray(size);
-            case SORTED -> sortedArray(size);
-            case DUPLICATES -> duplicatesArray(size);
+
+            case RANDOM ->
+                    randomArray(size);
+
+            case SORTED ->
+                    sortedArray(size);
+
+            case DUPLICATES ->
+                    duplicatesArray(size);
         };
     }
 
     public static int[] randomArray(int size) {
+
         int[] array = new int[size];
 
         for (int i = 0; i < size; i++) {
@@ -29,6 +40,7 @@ public final class ArrayUtils {
     }
 
     public static int[] sortedArray(int size) {
+
         int[] array = randomArray(size);
 
         Arrays.sort(array);
@@ -37,6 +49,7 @@ public final class ArrayUtils {
     }
 
     public static int[] duplicatesArray(int size) {
+
         int[] array = new int[size];
 
         for (int i = 0; i < size; i++) {
